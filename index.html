@@ -4,292 +4,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Calculator</title>
-    <style>
-        body {
-            font-family: "New Amsterdam", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom right, #e0f7fa, #80deea);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-        
-        .container {
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            max-width: 600px;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        
-        h2 {
-            text-align: center;
-            font-size: 1.8em;
-            color: #5c6bc0;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        
-        h3 {
-            margin-bottom: 15px;
-            color: #512da8;
-            font-weight: bold;
-            text-align: left;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .form-group label {
-            color: #5c6bc0;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .form-group input,
-        .form-group select {
-            padding: 10px;
-            border: 1px solid #5c6bc0;
-            border-radius: 5px;
-            text-align: right;
-            width: 100%;
-            margin-top: 8px;
-            box-sizing: border-box;
-        }
-        
-        button {
-            background-color: #512da8;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1.2em;
-            transition: background 0.3s, transform 0.3s;
-        }
-        
-        button:hover {
-            background-color: #5c6bc0;
-            transform: scale(1.05);
-        }
-        
-        #result {
-            margin-top: 20px;
-            font-size: 1.5em;
-            color: #512da8;
-            font-weight: bold;
-            text-align: center;
-        }
-        
-        .section {
-            margin-bottom: 20px;
-        }
-        
-        .section hr {
-            border: 1px solid #ccc;
-            margin-bottom: 20px;
-        }
-        
-        @media (max-width: 600px) {
-            h2 {
-                font-size: 1.5em;
-            }
-            .form-group input,
-            .form-group select {
-                padding: 12px;
-            }
-            button {
-                font-size: 1em;
-            }
-            #result {
-                font-size: 1.2em;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Modern Login Page | AsmrProg</title>
 </head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+        background-color: #c9d6ff;
+        background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100vh;
+    }
+    
+    .container {
+        background-color: #fff;
+        border-radius: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+        position: relative;
+        overflow: hidden;
+        width: 768px;
+        max-width: 100%;
+        min-height: 480px;
+    }
+    
+    .container p {
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.3px;
+        margin: 20px 0;
+    }
+    
+    .container span {
+        font-size: 12px;
+    }
+    
+    .container a {
+        color: white;
+        /* Changed to white */
+        font-size: 13px;
+        text-decoration: none;
+        margin: 15px 0 10px;
+    }
+    
+    .container button {
+        background-color: #512da8;
+        color: #fff;
+        font-size: 12px;
+        padding: 10px 45px;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+    
+    .container button.hidden {
+        background-color: transparent;
+        border-color: #fff;
+    }
+    
+    .container form {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 40px;
+        height: 100%;
+    }
+    
+    .container input {
+        background-color: #eee;
+        border: none;
+        margin: 8px 0;
+        padding: 10px 15px;
+        font-size: 13px;
+        border-radius: 8px;
+        width: 100%;
+        outline: none;
+        color: black;
+        /* Changed to black */
+    }
+    
+    .form-container {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        transition: all 0.6s ease-in-out;
+    }
+    
+    .sign-in {
+        left: 0;
+        width: 50%;
+        z-index: 2;
+    }
+    
+    .container.active .sign-in {
+        transform: translateX(100%);
+    }
+    
+    .sign-up {
+        left: 0;
+        width: 50%;
+        opacity: 0;
+        z-index: 1;
+    }
+    
+    .container.active .sign-up {
+        transform: translateX(100%);
+        opacity: 1;
+        z-index: 5;
+        animation: move 0.6s;
+    }
+    
+    @keyframes move {
+        0%,
+        49.99% {
+            opacity: 0;
+            z-index: 1;
+        }
+        50%,
+        100% {
+            opacity: 1;
+            z-index: 5;
+        }
+    }
+    
+    .social-icons {
+        margin: 20px 0;
+    }
+    
+    .social-icons a {
+        border: 1px solid #ccc;
+        border-radius: 20%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 3px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .toggle-container {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        transition: all 0.6s ease-in-out;
+        border-radius: 150px 0 0 100px;
+        z-index: 1000;
+    }
+    
+    .container.active .toggle-container {
+        transform: translateX(-100%);
+        border-radius: 0 150px 100px 0;
+    }
+    
+    .toggle {
+        background-color: #512da8;
+        height: 100%;
+        background: linear-gradient(to right, #5c6bc0, #512da8);
+        color: #fff;
+        position: relative;
+        left: -100%;
+        height: 100%;
+        width: 200%;
+        transform: translateX(0);
+        transition: all 0.6s ease-in-out;
+    }
+    
+    .container.active .toggle {
+        transform: translateX(50%);
+    }
+    
+    .toggle-panel {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 30px;
+        text-align: center;
+        top: 0;
+        transform: translateX(0);
+        transition: all 0.6s ease-in-out;
+    }
+    
+    .toggle-left {
+        transform: translateX(-200%);
+    }
+    
+    .container.active .toggle-left {
+        transform: translateX(0);
+    }
+    
+    .toggle-right {
+        right: 0;
+        transform: translateX(0);
+    }
+    
+    .container.active .toggle-right {
+        transform: translateX(200%);
+    }
+    
+    h1 {
+        color: #5c6bc0;
+    }
+    
+    .h1 h1 {
+        color: white;
+    }
+    
+    button {
+        color: white;
+    }
+    
+    .a a {
+        color: white;
+        /* Changed to white */
+    }
+    
+    .email {
+        color: #512da8;
+    }
+</style>
 
 <body>
-    <div class="container">
-        <h2>Income Tax Calculator</h2>
 
-        <div class="section">
-            <div class="form-group">
-                <label for="assessment-year">Assessment Year:</label>
-                <select id="assessment-year">
-                    <option value="2023-2024">2023 - 2024</option>
-                    <option value="2024-2025">2024 - 2025</option>
-                </select>
-            </div>
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form>
+                <h1>
+                    Create Account</h1>
 
-            <div class="form-group">
-                <label for="age-group">Age Category:</label>
-                <select id="age-group">
-                    <option value="below60">Below 60</option>
-                    <option value="60-80">60 - 80</option>
-                    <option value="above80">Above 80</option>
-                </select>
+                <span>or use your email for registration</span>
+                <input type="text" placeholder="Name">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <button><a href="Index22.html">Sign Up</a></button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form>
+                <h1>Sign In</h1>
+                <span>or use your email password</span>
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <a href="#">Forget Your Password?</a>
+                <div class="a">
+                    <button><a href="Index22.html">Sign In</a> </button></div>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <div class="h1">
+                        <h1>Welcome Back!</h1>
+                    </div>
+                    <p>Enter your personal details to use all of site features</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <div class="h1">
+                        <h1> </h1>
+                    </div>
+                    <p>Register with your personal details to use all of site features</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
             </div>
         </div>
-
-        <!-- Income Section -->
-        <div class="section">
-            <h3>Income</h3>
-            <hr>
-            <div class="form-group">
-                <label for="gross-income">Gross Salary Income:</label>
-                <input type="number" id="gross-income">
-            </div>
-            <div class="form-group">
-                <label for="other-income">Annual Income from Other Sources:</label>
-                <input type="number" id="other-income">
-            </div>
-            <div class="form-group">
-                <label for="interest-income">Annual Income from Interest:</label>
-                <input type="number" id="interest-income">
-            </div>
-            <div class="form-group">
-                <label for="rental-income">Annual Income from Let-Out House Property (Rental Income):</label>
-                <input type="number" id="rental-income">
-            </div>
-            <div class="form-group">
-                <label for="home-loan-interest-self">Annual Interest Paid on Home Loan (Self-Occupied):</label>
-                <input type="number" id="home-loan-interest-self">
-            </div>
-            <div class="form-group">
-                <label for="home-loan-interest-let-out">Annual Interest Paid on Home Loan (Let-Out):</label>
-                <input type="number" id="home-loan-interest-let-out">
-            </div>
-        </div>
-
-        <!-- HRA Exemption Section -->
-        <div class="section">
-            <h3>HRA Exemption</h3>
-            <hr>
-            <div class="form-group">
-                <label for="basic-salary">Basic Salary Received Per Annum:</label>
-                <input type="number" id="basic-salary">
-            </div>
-            <div class="form-group">
-                <label for="da">Dearness Allowance (DA) Received Per Annum:</label>
-                <input type="number" id="da">
-            </div>
-            <div class="form-group">
-                <label for="hra">HRA Received Per Annum:</label>
-                <input type="number" id="hra">
-            </div>
-            <div class="form-group">
-                <label for="rent-paid">Total Rent Paid Per Annum:</label>
-                <input type="number" id="rent-paid">
-            </div>
-            <div class="form-group">
-                <label for="metro-city">Do you live in a metro city?</label>
-                <select id="metro-city">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Deductions Section -->
-        <div class="section">
-            <h3>Deductions</h3>
-            <hr>
-            <div class="form-group">
-                <label for="deductions">Basic Deductions u/s 80C:</label>
-                <input type="number" id="deductions">
-            </div>
-            <div class="form-group">
-                <label for="nps">Contribution to NPS u/s 80CCD(1B):</label>
-                <input type="number" id="nps">
-            </div>
-            <div class="form-group">
-                <label for="medical-insurance">Medical Insurance Premium u/s 80D:</label>
-                <input type="number" id="medical-insurance">
-            </div>
-            <div class="form-group">
-                <label for="charity">Donation to Charity u/s 80G:</label>
-                <input type="number" id="charity">
-            </div>
-            <div class="form-group">
-                <label for="edu-loan">Interest on Educational Loan u/s 80E:</label>
-                <input type="number" id="edu-loan">
-            </div>
-            <div class="form-group">
-                <label for="savings-interest">Interest on Deposits in Savings Account u/s 80TTA/TTB:</label>
-                <input type="number" id="savings-interest">
-            </div>
-        </div>
-
-        <!-- Calculate Button -->
-        <button id="calculate-btn">Calculate</button>
-
-        <!-- Result Section -->
-        <div id="result"></div>
     </div>
 
-    <!-- Botpress Chat Widget Container -->
-    <div id="botpress-chat-container">
-        <!-- The bot widget will be injected here by the script -->
-    </div>
-    <br>
-    <br>
-    <!-- Botpress Web Chat Embed Code -->
-    <script src="https://cdn.botpress.cloud/webchat/v2.1/inject.js"></script>
-    <script src="https://mediafiles.botpress.cloud/e3f26b19-7b1c-4264-af5f-8d984e9ae197/webchat/v2.1/config.js"></script>
-    <br>
-    <br>
-    <br>
-    <br><br>
+    <script src="script.js"></script>
     <script>
-        document.getElementById('calculate-btn').addEventListener('click', function() {
-            var grossIncome = parseFloat(document.getElementById('gross-income').value) || 0;
-            var hra = parseFloat(document.getElementById('hra').value) || 0;
-            var rentPaid = parseFloat(document.getElementById('rent-paid').value) || 0;
-            var metroCity = document.getElementById('metro-city').value === 'yes';
-            var deductions = parseFloat(document.getElementById('deductions').value) || 0;
-            var nps = parseFloat(document.getElementById('nps').value) || 0;
-            var medicalInsurance = parseFloat(document.getElementById('medical-insurance').value) || 0;
-            var charity = parseFloat(document.getElementById('charity').value) || 0;
-            var eduLoan = parseFloat(document.getElementById('edu-loan').value) || 0;
-            var savingsInterest = parseFloat(document.getElementById('savings-interest').value) || 0;
-            var ageGroup = document.getElementById('age-group').value;
+        const container = document.getElementById('container');
+        const registerBtn = document.getElementById('register');
+        const loginBtn = document.getElementById('login');
 
-            var taxableIncome = grossIncome + hra + rentPaid + deductions + nps + medicalInsurance + charity + eduLoan + savingsInterest;
+        registerBtn.addEventListener('click', () => {
+            container.classList.add("active");
+        });
 
-            // Simplified tax calculation logic
-            var tax = 0;
-            if (ageGroup === 'below60') {
-                if (taxableIncome <= 250000) tax = 0;
-                else if (taxableIncome <= 500000) tax = (taxableIncome - 250000) * 0.05;
-                else if (taxableIncome <= 1000000) tax = 12500 + (taxableIncome - 500000) * 0.1;
-                else tax = 112500 + (taxableIncome - 1000000) * 0.3;
-            } else if (ageGroup === '60-80') {
-                if (taxableIncome <= 300000) tax = 0;
-                else if (taxableIncome <= 500000) tax = (taxableIncome - 300000) * 0.05;
-                else if (taxableIncome <= 1000000) tax = 10000 + (taxableIncome - 500000) * 0.2;
-                else tax = 110000 + (taxableIncome - 1000000) * 0.3;
-            } else if (ageGroup === 'above80') {
-                if (taxableIncome <= 500000) tax = 0;
-                else if (taxableIncome <= 1000000) tax = (taxableIncome - 500000) * 0.1;
-                else tax = 50000 + (taxableIncome - 1000000) * 0.3;
-            }
-
-            document.getElementById('result').innerText = 'Estimated Tax: ₹' + tax.toFixed(2);
+        loginBtn.addEventListener('click', () => {
+            container.classList.remove("active");
         });
     </script>
-
 </body>
 
 </html>
