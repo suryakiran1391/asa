@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator</title>
+    <style>
+        body {
+            font-family: "New Amsterdam", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #e0f7fa, #80deea);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        
+        .container {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 1.8em;
+            color: #5c6bc0;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            margin-bottom: 15px;
+            color: #512da8;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            color: #5c6bc0;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .form-group input,
+        .form-group select {
+            padding: 10px;
+            border: 1px solid #5c6bc0;
+            border-radius: 5px;
+            text-align: right;
+            width: 100%;
+            margin-top: 8px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #512da8;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.2em;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        button:hover {
+            background-color: #5c6bc0;
+            transform: scale(1.05);
+        }
+        
+        #result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #512da8;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+        }
+        
+        .section hr {
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            h2 {
+                font-size: 1.5em;
+            }
+            .form-group input,
+            .form-group select {
+                padding: 12px;
+            }
+            button {
+                font-size: 1em;
+            }
+            #result {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Income Tax Calculator</h2>
+
+        <div class="section">
+            <div class="form-group">
+                <label for="assessment-year">Assessment Year:</label>
+                <select id="assessment-year">
+                    <option value="2023-2024">2023 - 2024</option>
+                    <option value="2024-2025">2024 - 2025</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="age-group">Age Category:</label>
+                <select id="age-group">
+                    <option value="below60">Below 60</option>
+                    <option value="60-80">60 - 80</option>
+                    <option value="above80">Above 80</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Income Section -->
+        <div class="section">
+            <h3>Income</h3>
+            <hr>
+            <div class="form-group">
+                <label for="gross-income">Gross Salary Income:</label>
+                <input type="number" id="gross-income">
+            </div>
+            <div class="form-group">
+                <label for="other-income">Annual Income from Other Sources:</label>
+                <input type="number" id="other-income">
+            </div>
+            <div class="form-group">
+                <label for="interest-income">Annual Income from Interest:</label>
+                <input type="number" id="interest-income">
+            </div>
+            <div class="form-group">
+                <label for="rental-income">Annual Income from Let-Out House Property (Rental Income):</label>
+                <input type="number" id="rental-income">
+            </div>
+            <div class="form-group">
+                <label for="home-loan-interest-self">Annual Interest Paid on Home Loan (Self-Occupied):</label>
+                <input type="number" id="home-loan-interest-self">
+            </div>
+            <div class="form-group">
+                <label for="home-loan-interest-let-out">Annual Interest Paid on Home Loan (Let-Out):</label>
+                <input type="number" id="home-loan-interest-let-out">
+            </div>
+        </div>
+
+        <!-- HRA Exemption Section -->
+        <div class="section">
+            <h3>HRA Exemption</h3>
+            <hr>
+            <div class="form-group">
+                <label for="basic-salary">Basic Salary Received Per Annum:</label>
+                <input type="number" id="basic-salary">
+            </div>
+            <div class="form-group">
+                <label for="da">Dearness Allowance (DA) Received Per Annum:</label>
+                <input type="number" id="da">
+            </div>
+            <div class="form-group">
+                <label for="hra">HRA Received Per Annum:</label>
+                <input type="number" id="hra">
+            </div>
+            <div class="form-group">
+                <label for="rent-paid">Total Rent Paid Per Annum:</label>
+                <input type="number" id="rent-paid">
+            </div>
+            <div class="form-group">
+                <label for="metro-city">Do you live in a metro city?</label>
+                <select id="metro-city">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Deductions Section -->
+        <div class="section">
+            <h3>Deductions</h3>
+            <hr>
+            <div class="form-group">
+                <label for="deductions">Basic Deductions u/s 80C:</label>
+                <input type="number" id="deductions">
+            </div>
+            <div class="form-group">
+                <label for="nps">Contribution to NPS u/s 80CCD(1B):</label>
+                <input type="number" id="nps">
+            </div>
+            <div class="form-group">
+                <label for="medical-insurance">Medical Insurance Premium u/s 80D:</label>
+                <input type="number" id="medical-insurance">
+            </div>
+            <div class="form-group">
+                <label for="charity">Donation to Charity u/s 80G:</label>
+                <input type="number" id="charity">
+            </div>
+            <div class="form-group">
+                <label for="edu-loan">Interest on Educational Loan u/s 80E:</label>
+                <input type="number" id="edu-loan">
+            </div>
+            <div class="form-group">
+                <label for="savings-interest">Interest on Deposits in Savings Account u/s 80TTA/TTB:</label>
+                <input type="number" id="savings-interest">
+            </div>
+        </div>
+
+        <!-- Calculate Button -->
+        <button id="calculate-btn">Calculate</button>
+
+        <!-- Result Section -->
+        <div id="result"></div>
+    </div>
+
+    <!-- Botpress Chat Widget Container -->
+    <div id="botpress-chat-container">
+        <!-- The bot widget will be injected here by the script -->
+    </div>
+    <br>
+    <br>
+    <!-- Botpress Web Chat Embed Code -->
+    <script src="https://cdn.botpress.cloud/webchat/v2.1/inject.js"></script>
+    <script src="https://mediafiles.botpress.cloud/e3f26b19-7b1c-4264-af5f-8d984e9ae197/webchat/v2.1/config.js"></script>
+    <br>
+    <br>
+    <br>
+    <br><br>
+    <script>
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            var grossIncome = parseFloat(document.getElementById('gross-income').value) || 0;
+            var hra = parseFloat(document.getElementById('hra').value) || 0;
+            var rentPaid = parseFloat(document.getElementById('rent-paid').value) || 0;
+            var metroCity = document.getElementById('metro-city').value === 'yes';
+            var deductions = parseFloat(document.getElementById('deductions').value) || 0;
+            var nps = parseFloat(document.getElementById('nps').value) || 0;
+            var medicalInsurance = parseFloat(document.getElementById('medical-insurance').value) || 0;
+            var charity = parseFloat(document.getElementById('charity').value) || 0;
+            var eduLoan = parseFloat(document.getElementById('edu-loan').value) || 0;
+            var savingsInterest = parseFloat(document.getElementById('savings-interest').value) || 0;
+            var ageGroup = document.getElementById('age-group').value;
+
+            var taxableIncome = grossIncome + hra + rentPaid + deductions + nps + medicalInsurance + charity + eduLoan + savingsInterest;
+
+            // Simplified tax calculation logic
+            var tax = 0;
+            if (ageGroup === 'below60') {
+                if (taxableIncome <= 250000) tax = 0;
+                else if (taxableIncome <= 500000) tax = (taxableIncome - 250000) * 0.05;
+                else if (taxableIncome <= 1000000) tax = 12500 + (taxableIncome - 500000) * 0.1;
+                else tax = 112500 + (taxableIncome - 1000000) * 0.3;
+            } else if (ageGroup === '60-80') {
+                if (taxableIncome <= 300000) tax = 0;
+                else if (taxableIncome <= 500000) tax = (taxableIncome - 300000) * 0.05;
+                else if (taxableIncome <= 1000000) tax = 10000 + (taxableIncome - 500000) * 0.2;
+                else tax = 110000 + (taxableIncome - 1000000) * 0.3;
+            } else if (ageGroup === 'above80') {
+                if (taxableIncome <= 500000) tax = 0;
+                else if (taxableIncome <= 1000000) tax = (taxableIncome - 500000) * 0.1;
+                else tax = 50000 + (taxableIncome - 1000000) * 0.3;
+            }
+
+            document.getElementById('result').innerText = 'Estimated Tax: ₹' + tax.toFixed(2);
+        });
+    </script>
+
+</body>
+
+</html>
